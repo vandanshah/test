@@ -1,26 +1,55 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Product from './Components/Product';
+import {NetworkInformation} from 'react-network-info'
 
-function App() {
+function Load() {
   return (
-    <div className="App">
+    <div className="App col-12">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          <h1 style={{color:"red"}}> <i>Loading ...</i></h1>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
-  );
+  )
+}
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      isLoading : true,
+      product:''
+    };
+  }
+  async componentDidMount(){
+    var ip = await fetch('https://api.ipify.org')
+    var str = await ip.text();
+    var url = 'http://localhost:8081/api/getProduct?ua='+navigator.userAgent+'&ip='+str;
+    const response = await fetch(url);
+    const body = await response.json();
+    this.setState({
+      product:body,
+      isLoading: false
+    });
+  }
+
+  render(){
+    const isLoading = this.state.isLoading;
+    if(isLoading){
+      return <Load />;
+    }
+    return(
+      <div className="container">
+        <div className="row">
+            <Product ps = {this.state.product} />
+        </div>
+      </div>
+    )
+  }
 }
 
 export default App;
