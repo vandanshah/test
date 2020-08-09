@@ -28,7 +28,7 @@ class App extends Component {
   async componentDidMount(){
     var ip = await fetch('https://api.ipify.org')
     var str = await ip.text();
-    var url = 'http://test-env.eba-ccmtr72z.us-west-1.elasticbeanstalk.com/getProduct?ua='+navigator.userAgent+'&ip='+str;
+    var url = 'http://test-env.eba-ccmtr72z.us-west-1.elasticbeanstalk.com/getProduct?ua=&ip=';
     //var url = 'http://localhost:5000/getProduct?ua='+navigator.userAgent+'&ip='+str;
     const response = await fetch(url);
     const body = await response.json();
