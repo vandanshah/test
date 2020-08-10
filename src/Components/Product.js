@@ -15,7 +15,7 @@ class Product extends Component{
                 <Card style={{border:"solid"}}>
                     <CardBody>
                         <CardImgOverlay>
-                            <CardTitle>{this.props.ps.data.name}</CardTitle>
+                            <CardTitle style={{marginLeft:"50%"}}><h1>{this.props.ps.data.name}</h1></CardTitle>
                         </CardImgOverlay>
                         <CardImg  src={this.props.ps.data.image_url} alt={this.props.ps.data.name}></CardImg>
                         <CardText>Click URL: visit product page</CardText>
