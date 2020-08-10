@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/API/.settings
+/API/build-artifacts-backup
+/API/target
+/API/.classpath
+/API/.project
