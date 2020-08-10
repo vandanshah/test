@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Product from './Components/Product';
-import {NetworkInformation} from 'react-network-info'
+/* Indicating Loading */
 
 function Load() {
   return (
@@ -25,13 +25,18 @@ class App extends Component {
       product:''
     };
   }
+  
+  /* Fetch data by calling back end as soon as Component mounts */
+
   async componentDidMount(){
-    var ip = await fetch('https://api.ipify.org')
+    var ip = await fetch('https://api.ipify.org')  // Fetch ip address of client
     var str = await ip.text();
-    var url = 'http://test-env.eba-ccmtr72z.us-west-1.elasticbeanstalk.com/getProduct?ua=&ip=';
-    //var url = 'http://localhost:5000/getProduct?ua='+navigator.userAgent+'&ip='+str;
+    var url = 'http://test-env.eba-ccmtr72z.us-west-1.elasticbeanstalk.com/getProduct?ua='+navigator.userAgent+'&ip='+str;  // call back end
     const response = await fetch(url);
     const body = await response.json();
+
+    /* Updates state */
+    
     this.setState({
       product:body,
       isLoading: false
